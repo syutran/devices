@@ -1,0 +1,32 @@
+<div class="row">
+<% @users.each do |user| %>
+  <div class="col-sm-12 col-md-12 col-lg-6">
+    <div class="card text-center" style="margin-bottom:20px;">
+      <div class="card-header">
+        <h5><%= user.name%></h5>
+      </div>
+
+      <%= "权限："+ user_grade_title(user.grade) %>
+      <br>
+      <%= "邮箱地址：" + user.email %>
+      <br>
+      管理部门：
+      <%= user.branches_name %>
+      <div class="card-footer text-muted">
+        <div class="btn-group btn-group-sm">
+          <%= link_to '重置密码', edit_password_reset_path(user), class: "btn btn-warning" %>
+          <%= link_to '设置/修改', edit_user_path(user), class: "btn btn-primary" %>
+          <%= link_to '删除这个用户', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+<%= content_for :sidebar do %>
+  <div style="margin-bottom:15px;">
+    <%= link_to signup_path, class: "btn btn-success btn-block" do %>
+      <% fa_icon "plus", text: "添加新的管理员" %>
+    <% end %>
+  </div>
+<% end %>

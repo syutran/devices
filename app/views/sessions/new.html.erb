@@ -1,0 +1,35 @@
+<br>
+<br>
+<h1>登录到系统</h1>
+<br>
+<br>
+<div class="row">
+  <div class="col-md-9 col-md-offset-3">
+    <%= form_for(:session, url: login_path) do |f| %>
+    <div class="row listhead">
+      <div class="col-md-4">使用邮箱地址登录</div>
+      <div class="col-md-8">
+      <%= f.email_field :email, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row listhead">
+      <div class="col-md-4">登录密码</div>
+      <div class="col-md-8">
+      <%= f.password_field :password, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row listhaed">
+      <div class="col-md-4"></div>
+      <div class="col-md-8">
+      <%= f.submit "登录到系统", class: "btn btn-primary" %>
+      </div>
+    </div>
+    <% end %>
+    <div class="row listhead">
+      <div class="col-md-4"></div>
+      <div class="col-md-8">
+        <p>New user? <%= link_to "注册成为新会员", signup_path %></p>
+      </div>
+    </div>
+  </div>
+</div>

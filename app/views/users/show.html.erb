@@ -1,0 +1,23 @@
+<div class="card text-center">
+  <div calss="card-header">
+    <%= image_tag @user.avatar.url(:thumb), class: "rounded-circle", style: "width:100px;" %>
+      <h4 class="card-title"> <%= @user.name %></h4>
+      <%= @user.email %>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <%= @user.branches_name %>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <%= link_to edit_password_reset_path(@user), class: "btn btn-outline-warning" do %>
+        <%= fa_icon "key", text:"重置登录密码" %>
+      <% end %>
+      <%= link_to edit_avatar_user_path(@user), class: "btn btn-outline-info" do %>
+        <%= fa_icon "smile-o", text:"设置头像" %>
+      <% end %>
+      <%= link_to(logout_path, method: "delete", class: "btn btn-outline-success") do %>
+        <%= fa_icon "sign-out", text: "安全退出" %>
+      <% end %>
+    </li>
+  </ul>
+</div>

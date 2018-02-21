@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: current_user.name) do |sheet|
+sheet.add_row ["ID","名称","厂商","类型","型号","序列号","购置日期","领用日期","使用人","状态"]
+  @devices.each do |device|
+    sheet.add_row [device.id,device.title,device.manufacturer, (device.category ? device.category.title : ""), device.dev_model,device.serial_number, device.purchased, device.used, device.user, device.get_status]
+  end
+end

@@ -1,0 +1,35 @@
+<%= simple_form_for(@category, html: { class: "form-horizontal" }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row" style="padding-top:10px;">
+      <div class="col-3 text-right">分类名称：</div>
+      <div class="col-9">
+        <%= f.input :title, label:false %>
+      </div>
+    </div>
+    <div class="row" style="padding-top:10px;">
+      <div class="col-3 text-right">上级类：</div>
+      <div class="col-9">
+        <%= f.input :master_id, collection:get_grade_categories, as: :radio_buttons, label:false %>
+      </div>
+    </div>
+    <div class="row" style="padding-top:10px;">
+      <div class="col-3 text-right">头像：</div>
+      <div class="col-9">
+        <%= f.input :avatar, as: :file%>
+      </div>
+    </div>
+    <div class="row" style="padding-top:10px;">
+      <div class="col-3 text-right">此类说明：</div>
+      <div class="col-9">
+        <%= f.input :description, label:false %>
+      </div>
+    </div>
+    <div class="row col-9 offset-3 text-right" style="padding-top:10px;">
+      <div class="form-actions">
+        <%= f.button :submit, "确定提交", class: "btn btn-default" %>
+      </div>
+    </div>
+  </div>
+<% end %>

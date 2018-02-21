@@ -1,0 +1,26 @@
+<h3><%= "重置 #{@user.name} 的密码" %></h3>
+<%= form_for @user, url: password_reset_path(params[:id])  do |f| %>
+  <div class="row" style="margin:10px;">
+    <div class="col-4">
+      重设密码：
+    </div>
+    <div class="col-8">
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
+  </div>
+    <div class="row" style="margin:10px;">
+    <div class="col-4">
+      重设密码确认：
+    </div>
+      <div class="col-8">
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+    </div>
+      <div class="row" style="margin:10px;">
+        <div class="col-4">
+        </div>
+      <div class="col-8">
+        <%= f.submit "确定提交", class: "btn btn-primary" %>
+      </div>
+  </div>
+<% end %>

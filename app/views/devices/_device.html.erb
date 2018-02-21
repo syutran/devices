@@ -1,0 +1,66 @@
+<div class="card" style="margin-bottom:20px;" >
+  <div style="position: relative;">
+      <%= device_head_image_tag device %>
+    <div class="image-text d-flex justify-content-between">
+      <h4 class="card-title"><%= device.title %></h4>
+      <h4 class="card-title"><%= device.sn %></h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 text-right">厂商：</div>
+    <div class="col-8"> <%= device.manufacturer ||= "未设置" %></div>
+  </div>
+  <div class="row">
+    <div class="col-4 text-right">设备分类：</div>
+    <div class="col-8"> <%= link_to device.category.title, devices_path(branch: params[:branch], dev_class: device.category.id) if device.category %></div>
+  </div>
+  <div class="row">
+    <div class="col-4 text-right">设备型号：</div>
+    <div class="col-8"> <%= device.dev_model ||= "未设置" %></div>
+  </div>
+  <div class="row">
+    <div class="col-4 text-right">序列号：</div>
+    <div class="col-8"> <%= device.serial_number ||= "未设置" %></div>
+  </div>
+  <div class="row">
+    <div class="col-4 text-right">配置参数：</div>
+    <div class="col-8"> <%= device.parameter ||= "未设置" %></div>
+  </div>
+  <div class="row">
+    <div class="col-4 text-right">购置日期：</div>
+    <div class="col-8"> <%= device.purchased ||= "未设置" %></div>
+  </div>
+  <div class="row">
+    <div class="col-4 text-right">使用日期：</div>
+    <div class="col-8"> <%= device.used ||= "未设置" %></div>
+  </div>
+  <div class="row">
+    <div class="col-4 text-right">使用部门：</div>
+    <div class="col-8"> <%= device.branch.branch if device.branch %></div>
+  </div>
+  <div class="row">
+    <div class="col-4 text-right">使用人：</div>
+    <div class="col-8">
+      <% if device.user %>
+        <%= link_to device.user, devices_path(:user=>device.user, branch: params[:branch]) %>
+        <% else %>
+          未设置
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 text-right">当前状态：</div>
+    <div class="col-8"> <%= device.get_status %></div>
+  </div>
+  <div class="card-footer text-right <%= 'bg-warning' if device.status != 1  %>">
+    <div class="btn-group">
+      <%= link_to '信息' + device.versions.length.to_s, device_path(device), class:"btn btn-outline-info" %>
+      <% if device.status < 7 %>
+        <%= link_to '更改信息', edit_device_path(device), class: "btn btn-outline-primary" %>
+      <% else %>
+        <% if current_user.is_admin %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

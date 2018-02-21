@@ -1,0 +1,47 @@
+<%= simple_form_for(@branch, html: {class: 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <div class="col-3 text-right">部门代码：</div>
+      <div class="col-9">
+        <%= f.input :branch_id, label:false %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3 text-right">部门名称：</div>
+      <div class="col-9">
+        <%= f.input :branch, label:false %>
+      </div>
+    </div>
+    <% if @branch.new_record? %>
+    <div class="row">
+      <div class="col-3 text-right">上级部门：</div>
+      <div class="col-9">
+        <%= f.input :master_id, collection: get_grade_branches, selected: get_grade_branches.first, label: false %>
+      </div>
+    </div>
+    <% end %>
+    <div class="row">
+      <div class="col-3 text-right">管理员：</div>
+      <div class="col-9">
+        <%= f.input :manager_id, collection: get_managers, selected: get_managers.first, label:false %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3 text-right">部门备注：</div>
+      <div class="col-9">
+        <%= f.input :description, label:false %>
+        <%= f.input :group, as: :hidden %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-9 offset-3 text-right">
+        <div class="btn-group">
+          <%= f.button :submit, "确定提交", class: "btn btn-primary" %>
+          <%= link_to '反回', :back, class: "btn btn-info" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

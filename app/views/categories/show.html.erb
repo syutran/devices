@@ -1,0 +1,52 @@
+<div class="col-12">
+  <div class="card text-center" style="margin-bottom:20px;" >
+    <div style="position: relative;">
+      <%= category_head_image_tag @category %>
+    <div class="card-block image-text d-flex">
+      <h5 class="card-title"><%= @category.title %></h5>
+    </div>
+    </div>
+    <ul class = "list-group list-group-flush">
+      <li class="list-group-item justify-content-center">
+        <div>隶属类：</div>
+        <div><%= @category.master.title if @category.master %></div>
+      </li>
+      <li class="list-group-item justify-content-center">
+        <div>设备数：</div>
+        <div><%= @category.devices_all_count.to_s %></div>
+      </li>
+    </ul>
+    <div class="card-footer text-muted">
+      <div class="btn-group btn-group-sm">
+        <%= link_to '编辑', edit_category_path(@category), class: "btn btn-outline-primary" %>
+        <%= link_to '删除', @category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-warning" %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= content_for :sidebar do %>
+  <ul class="list-group">
+    <% unless @category.subordinates.blank? %>
+      <% @category.subordinates.each do |sub| %>
+        <li class="list-group-item justify-content-between">
+          <%= link_to sub.title, devices_path(:dev_class => sub.id) %>
+          <span class="badge badge-default badge-pill">
+            <%= sub.devices.count.to_s %>
+          </span>
+        </li>
+      <% end %>
+    <% else %>
+      <% if @category.devices %>
+        <% @category.devices.select("dev_model, count(id) cou").group("dev_model").each do |device| %>
+          <li class="list-group-item justify-content-between">
+            <%= link_to device.dev_model, devices_path(:dev_model => device.dev_model) %>
+            <span class="badge badge-default badge-pill">
+              <%= device.cou.to_s %>
+            </span>
+          </li>
+        <% end %>
+      <% end %>
+
+    <% end %>
+  </ul>
+<% end %>

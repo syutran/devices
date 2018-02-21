@@ -1,0 +1,48 @@
+<div class="card text-center" style="margin-bottom:20px;">
+  <div class="card-header">
+    <h5><%= @branch.branch %></h5>
+  </div>
+  <div class="row">
+    <div class="col-6 text-right">部门编号：</div>
+    <div class="col-6 text-left nopadding"> <%= @branch.branch_id ||= "未设置" %></div>
+  </div>
+  <div class="row">
+    <div class="col-6 text-right">上级部门：</div>
+    <div class="col-6 text-left nopadding">
+      <% if @branch.parent %>
+        <% if current_user.is_admin %>
+          <%= link_to @branch.parent.branch, branch_path(@branch.parent)  %>
+        <% else %>
+          <%= @branch.parent.branch  %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 text-right">下级部门：</div>
+    <div class="col-6 text-left nopadding">
+      <%= link_to @branch.child_ids.count.to_s, branches_path(:branch => @branch.id), class: "btn btn-success btn-sm" if @branch.has_children? %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 text-right">管理员：</div>
+    <div class="col-6 text-left nopadding"> <%= @branch.manager.name if @branch.manager %></div>
+  </div>
+  <div class="card-block">
+    <div class="row">
+      <% Device.where(branch_id: @branch.id).pluck(:user).uniq.each do |u| %>
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2">
+          <%= fa_icon "user", text: u %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-footer text-muted">
+    <div class="btn-group btn-group-sm">
+      <%= link_to "设备：#{ @branch.devices.count}", devices_url(:branch => @branch), class: "btn btn-info" %>
+      <%= link_to '编辑', edit_branch_path(@branch), class: "btn btn-primary" %>
+      <%= link_to '增设下级部门', new_branch_path(:branch => @branch.id), class: "btn btn-success" %>
+      <%= link_to '删除', @branch, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning" %>
+    </div>
+  </div>
+</div>

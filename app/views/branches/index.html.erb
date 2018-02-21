@@ -1,0 +1,52 @@
+<% head_title current_user.root_branch %>
+<div class="row">
+  <% @branches.each do |branch| %>
+    <div class="col-sm-6 col-md-6 col-lg-4">
+      <div class="card text-center" style="margin-bottom:20px;">
+        <div class="card-header">
+          <h5><%= branch.branch %></h5>
+        </div>
+        <div class="row">
+          <div class="col-6 text-right">部门编号：</div>
+          <div class="col-6 text-left nopadding"> <%= branch.branch_id ||= "未设置" %></div>
+        </div>
+        <div class="row">
+          <div class="col-6 text-right">上级部门：</div>
+          <div class="col-6 text-left nopadding"> <%= branch.parent.branch if branch.parent %></div>
+        </div>
+        <div class="row">
+          <div class="col-6 text-right">下级部门：</div>
+          <div class="col-6 text-left nopadding">
+            <%= link_to branch.child_ids.count.to_s, branches_path(:branch => branch.id), class: "btn btn-success btn-sm" if branch.has_children? %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 text-right">管理员：</div>
+          <div class="col-6 text-left nopadding"> <%= branch.manager.name if branch.manager %></div>
+        </div>
+
+        <br>
+        <div class="card-footer text-muted">
+          <div class="btn-group btn-group-sm">
+            <%= link_to "设备：#{ branch.devices.count}", devices_url(:branch => branch), class: "btn btn-info" %>
+            <%= link_to '详细', branch_path(branch), class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<br>
+<%= content_for :sidebar do %>
+  <div>
+    <%= link_to new_branch_path, class:"btn btn-success btn-block" do %>
+      <% fa_icon "plus", text: "添加新部门" %>
+    <% end %>
+  </div>
+  <div>
+    <h5>说明：</h5>
+    <p>
+      必须要有一个顶级的汇总部门作为各部门的分支结点，以便于统计信息；
+    </p>
+  </div>
+<% end %>

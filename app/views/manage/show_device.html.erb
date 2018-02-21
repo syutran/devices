@@ -1,0 +1,47 @@
+<div class="row listhead justify-content-between">
+  <h3>设备详细</h3>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= render :layout => '/common/show_device', @device => @device do %>
+      <div class="btn-group">
+        <%= link_to '接收上交', manage_agree_turnup_path(@device), class: "btn btn-outline-primary" if @device.status == 3 %>
+        <%= link_to '退回/离地维修', manage_change_status_path(@device,:status => 2), class: "btn btn-outline-primary" if @device.status == 3 %>
+        <%= link_to '分发设备', manage_allot_path(@device), class: "btn btn-outline-primary" if @device.status == 4 || @device.status == 5 %>
+        <%= link_to '更改信息', edit_device_path(@device), class: "btn btn-outline-primary" if @device.status == 4 || @device.status == 5 %>
+        <%= link_to '设备图片', edit_device_avatar_path(@device), class: "btn btn-outline-info" %>
+        <%= link_to '报废设备', manage_change_status_path(@device,:status => 7), class: "btn btn-outline-primary" if @device.status == 4 || @device.status == 5 %>
+        <%= link_to '调回库存', manage_change_status_path(@device,:status => 5), class: "btn btn-outline-primary" if @device.status == 7 %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<% if @device.versions.length > 0 %>
+  <div class="card" style="margin-top:20px;">
+    <div class="card-header">
+      <h5 class="card-title">设备变更记录</h5>
+    </div>
+    <% versions = @device.versions.map { |v| [v.created_at,v.event, v.changeset] } %>
+    <% versions.each do |version| %>
+      <div class="list-group" style="margin:20px;">
+        <div class="list-group-item">
+          <%= version[0].to_s + ' => ' + get_version_event(version[1]) %>
+        </div>
+        <% version[2].each do |key, value| %>
+          <div class="list-group-item">
+            <div>
+              <%= get_title(key) + "由#{value[0]}变更为：#{value[1]}" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="card-footer text-muted">
+      <div class="btn-group ">
+        <% if current_user.is_admin %>
+          <%= link_to '删除历史版本',drop_versions_path(@device), class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

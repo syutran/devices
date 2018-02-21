@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: Branch.find(current_user.branch).branch) do |sheet|
+sheet.add_row ["ID","名称","大类类型"]
+  @categories.each do |category|
+    sheet.add_row [category.id,category.title,category.master.title]
+  end
+end

@@ -1,0 +1,97 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+@import "bootstrap";
+@import "font-awesome";
+@import "toastr";
+
+html{
+  font-size:16px;
+}
+
+@include media-breakpoint-up(xs) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 16px;
+  }
+}
+.listhead {
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.rowlist {
+  text-align: center;
+  border:1px solid;
+  min-height:300px;
+  width:20%;
+  padding:10px;
+  margin:10px;
+}
+.rowlist .head {
+  width:80%;
+  border-bottom:1px solid;
+  padding:10px;
+  margin:10px;
+  margin-right:auto;
+  margin-left:auto;
+}
+.rowlist .center {
+  width:80%;
+  margin:10px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.full {
+  width: 100%;
+}
+.gap {
+  height: 30px;
+  width: 100%;
+  clear: both;
+  display: block;
+}
+/** card title text **/
+.image-text {
+  bottom:0;
+  left:0;
+  width:100%;
+  text-align:center;
+  vertical-align:center;
+  position:absolute;
+  background-color:#121212;
+  opacity:0.4;
+  color:white;
+}

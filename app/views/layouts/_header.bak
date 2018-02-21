@@ -1,0 +1,53 @@
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="container">
+    <%= link_to root_path, id: "logo", class: "navbar-brand" do %>
+      <%= fa_icon "television", text:"电子设备统计管理" %>
+    <% end %>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <% if logged_in? %>
+          <% if current_user.is_admin %>
+            <li class="nav-item">
+              <%= link_to branches_path, class: "nav-link" do %>
+                <%= fa_icon "sitemap", text: "机构部门" %>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to categories_path, class: "nav-link" do %>
+                <%= fa_icon "cogs", text: "设备分类" %>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to users_path, class: "nav-link" do %>
+                <%= fa_icon "users", text: "部门管理员" %>
+              <% end %>
+            </li>
+          <% elsif current_user.grade == 1 && current_user.branch %>
+            <li class="nav-item">
+              <%= link_to branch_devices_path(current_user.branch), class: "nav-link" do %>
+                <%= fa_icon "list", text: "设备列表" %>
+              <% end %>
+            </li>
+          <% end %>
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+              <%= fa_icon "user", text: current_user.name %> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "我的信息", current_user, class: "dropdown-item" %></li>
+              <li class="dropdown-item"></li>
+              <li>
+                <%= link_to "Log out", logout_path, method: "delete", class: "dropdown-item" %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="nav-item"><%= link_to "Log in", login_path, class: "nav-link" %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

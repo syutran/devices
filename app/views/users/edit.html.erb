@@ -1,0 +1,35 @@
+<h3>修改管理员</h3>
+<%= simple_form_for @user , url: {:controller => "users", :action => "update", :id => @user} do |f| %>
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-4 text-right">名字：</div>
+    <div class="col-8">
+      <%= f.input :name, label:false  %>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-4 text-right">邮箱地址：</div>
+    <div class="col-8">
+      <%= f.input :email, label: false %>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-4 text-right">个性头像：</div>
+    <div class="col-8">
+      <%= f.input :avatar, label: false, as: :file %>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-4 text-right">管理范围：</div>
+    <div class="col-8">
+      <%= f.input :grade, collection: [["未设置",0],["部门管理员",1],["高级管理员",9],["窃密者",7]], label: false, as: :radio_buttons %>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-4"></div>
+    <div class="col-8 text-right">
+      <%= f.input :group, as: :hidden %>
+      <%= f.button :submit, "确定提交", class: "btn btn-outline-primary" %>
+      <%= link_to '返回', :back, class: "btn btn-outline-info" %>
+    </div>
+  </div>
+<% end %>

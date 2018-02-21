@@ -1,0 +1,39 @@
+<div class="d-flex listthead justify-content-between">
+  <h3>计划上交设备列表</h3>
+</div>
+<div class="col-12 nopadding">
+    <%= paginate @turnup_devices, theme: 'twitter-bootstrap-4'%>
+  </div>
+<div class="row">
+  <% @turnup_devices.each do |device| %>
+    <div class="col-sm-12 col-md-12 col-lg-6">
+      <%= render partial: "device", locals: { device: device} %>
+    </div>
+  <% end %>
+</div>
+<div class="row" >
+  <div class="col-12 text-right">
+    <%= paginate @turnup_devices, theme: 'twitter-bootstrap-4' %>
+  </div>
+</div>
+
+<%= content_for :sidebar do %>
+  <% Category.where(:master => 1, :group => current_user.group).all.each do |category|  %>
+    <ul class="list-group" style="margin-top:15px;">
+      <li class="list-group-item">
+        <%= category.title %>
+      </li>
+      <% category.subordinates.each do |c| %>
+        <% counts = c.devices.where(:status => 3).count %>
+        <% if counts > 0 %>
+          <li class="list-group-item justify-content-between">
+            <%= c.title %>
+            <span class="badge badge-default badge-pill">
+              <%= counts.to_s %>
+            </span>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

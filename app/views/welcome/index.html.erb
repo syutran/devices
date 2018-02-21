@@ -1,0 +1,72 @@
+<h1>欢迎使用电子设备统计管理系统</h1>
+<hr>
+<div class="row">
+  <div class="col-sm-12 col-md-12 col-lg-6 d-flex" style="margin-bottom:30px;">
+    <div class="card">
+      <img class="card-img-top" style="width:100%;max-height:auto;background-size:cover;" src="/system/images/cards/welcome_01.jpg" >
+      <div class="card-block">
+        <h3 class="card-title">基本功能</h3>
+        <p class="card-text">
+          主要实现统一采购的电子设备，分发给各部门或分支机构使用并进行统一登记管理。实现购置入库，领用分发，收回入库和报废等基础功能。
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-6 d-flex" style="margin-bottom:30px;">
+    <div class="card">
+      <img class="card-img-top" style="width:100%;max-height:auto;background-size:cover;" src="/system/images/cards/welcome_02.jpg" >
+      <div class="card-block">
+        <h3 class="card-title">两级设备分类</h3>
+        <p class="card-text">
+          顶级分类可分为“大型设备”，“中型设备”，“小型设备”和“微型设备”，二级分类细化。所有登记的电子设备都归属为二级分类下，便于按类别统计辖内设备数量。
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-6 d-flex" style="margin-bottom:30px;">
+    <div class="card ">
+      <div style="position:relative;">
+        <img class="card-img-top img-responsive" style="width:100%;max-height:auto;background-size:cover;" src="/system/images/cards/welcome_03.jpg" >
+        <div class="image-text"><h3>aaa</h3></div>
+      </div>
+      <div class="card-block">
+        <h3 class="card-title">多级部门设置</h3>
+        <p class="card-text">
+          顶级部门用于新设备的入库、分发、收回、报废处理，也对全辖设备进行汇总处理。二级部门及分支机构对设备进行领用、登记使用情况和使用人信息，实时进行核对，统计。
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-6 d-flex" style="margin-bottom:30px;">
+    <div class="card">
+      <img class="card-img-top" style="width:100%;max-height:auto;background-size:cover;" src="/system/images/cards/welcome_04.jpg" >
+      <div class="card-block">
+        <h3 class="card-title">部门管理员</h3>
+        <p class="card-text">
+          部门管理员由系统管理员设定。通过手机或电脑对本部门的电子设备进行统计与管理。实现领用，登记，变更，交回等功能。
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-6 d-flex" style="margin-bottom:30px;">
+    <div class="card">
+      <img class="card-img-top" style="width:100%;max-height:auto;background-size:cover;" src="/system/images/welcome/browsers_supported.png" >
+      <div class="card-block">
+        <h3 class="card-title">支持的浏览器</h3>
+        <p class="card-text">
+          本系统支持桌面版 chrome, firefox, opera, Microsoft edge 最新版的浏览器器及 IE10 以上的浏览器。支持MAC OS Safair 浏览器。<br> 手机（移动）端支持 chrome firefox 及 Android v5.0+ 内置浏览器。<br>非以上浏览器可能影响您的使用体验~
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-6 text-center" style="margin-bottom:30px;">
+    <div class="btn-group">
+      <%= link_to login_path, class: "btn btn-success" do %>
+        <%= fa_icon "sign-in 2x", text: "用户登录" %>
+      <% end %>
+      <%= link_to signup_path, class: "btn btn-primary" do %>
+        <%= fa_icon "registered 2x", text: "注册新用户" %>
+      <% end %>
+    </div>
+  </div>
+</div>

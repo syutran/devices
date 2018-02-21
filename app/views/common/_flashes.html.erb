@@ -1,0 +1,7 @@
+<% if flash.any? %>
+  <% flash.map do |key, message| %>
+    <script>
+      msg_show('<%= flashes_class(key) %>','<%= message %>','<%= current_user.name if current_user %>');
+    </script>
+  <% end %>
+<% end %>

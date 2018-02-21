@@ -1,0 +1,159 @@
+<div>
+  添加图片
+</div>
+<%= simple_form_for @device, :url => update_device_avatar_path(@device), :method => :patch,html: {class: 'form-horizontal'} do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs" style="margin-top:20px;" >
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row">
+          <div class="col-4 text-right">名称</div>
+          <div class="col-8">
+            <%= @device.title %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row">
+          <div class="col-4 text-right">类型</div>
+          <div class="col-8">
+            <%= @device.category.title if @device.dev_class %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row">
+          <div class="col-4 text-right">厂商品牌</div>
+          <div class="col-8">
+            <%= @device.manufacturer %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row">
+          <div class="col-4 text-right">产品型号</div>
+          <div class="col-8">
+            <%= @device.dev_model %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row">
+          <div class="col-4 text-right">序列号</div>
+          <div class="col-8">
+            <%= @device.serial_number %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row">
+          <div class="col-4 text-right">详细配置</div>
+          <div class="col-8">
+            <%= @device.parameter %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row">
+          <div class="col-4 text-right">购置日期</div>
+          <div class="col-8">
+            <%= @device.purchased %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row">
+          <div class="col-4 text-right">使用日期</div>
+          <div class="col-8">
+            <%= @device.used %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row">
+          <div class="col-4 text-right">使用人</div>
+          <div class="col-8">
+            <%= @device.user %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row">
+          <div class="col-4 text-right">备注</div>
+          <div class="col-8">
+            <%= @device.description %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6" style="margin-top:20px;">
+        <div class="row">
+          <div class="col-4 text-right">设备图片</div>
+          <div class="col-8">
+            <%= image_tag @device.avatar.url(:medium), style: "width:200px; height:auto;" if @device.avatar.file? %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6" style="margin-top:20px;">
+        <div class="row">
+          <div class="col-8">
+            <%= f.input :avatar, label:false %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6" style="margin-top:20px;">
+        <div class="row">
+          <div class="col-4 text-right">设备标签</div>
+          <div class="col-8">
+            <%= image_tag @device.tagboard.url(:medium), style:"width:200px; height:auto;" if @device.tagboard.file? %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6" style="margin-top:20px;">
+        <div class="row">
+          <div class="col-8">
+            <%= f.input :tagboard, as: :file, label:false %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6" style="margin-top:20px;">
+        <div class="row">
+          <div class="col-4 text-right">附件图片</div>
+          <div class="col-8">
+            <%= image_tag @device.custom.url(:medium), style:"width:200px; height:auto;" if @device.custom.file? %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6" style="margin-top:20px;">
+        <div class="row">
+          <div class="col-8">
+            <%= f.input :custom, as: :file, label:false %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6" style="margin-top:20px;">
+        <div class="row">
+          <div class="col-4">
+          </div>
+          <div class="col-8 text-right">
+            <div class="btn-group">
+              <%= f.button :submit, "确定提交", class: "btn btn-outline-info" %>
+              <%= link_to '返回', :back, class: "btn btn-outline-info" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<%= content_for :sidebar do %>
+  <ul class="list-group">
+    <li class="list-group-item active">特别提醒</li>
+    <li class="list-group-item">
+      您的图片分辨率最好设置为 1024x615。过大的分辨率将会被压缩，空耗流量。过小的分辨率会使您的图片粗糙，就像打了马赛克思。
+    </li>
+    <li class="list-group-item">
+      设备列表头像显示的是“设备图片”，如果您没有设置，会显示为分类里的图片，如果您在分类里也没有设置自己的图片，只能显示系统默认的烂图了~
+    </li>
+  </ul>
+<% end %>

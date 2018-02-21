@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-sm-12 col-md-12 col-lg-6">
+    <div class="card text-center" style="margin-bottom:20px;">
+      <div class="card-header">
+        <h5 class="card-title">部门上交设备</h5>
+      </div>
+      <div class="card-block">
+        <h1><%= @turnup_devices.to_s %></h1>
+      </div>
+      <div class="card-footer text-muted">
+        <%= link_to manage_turnup_list_path, class: "btn btn-outline-info" do %>
+          <%= fa_icon "list", text: "查看详细" %>
+         <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-6">
+    <div class="card text-center" style="margin-bottom:20px;">
+      <div class="card-header">
+        <h5 class="card-title">库存设备</h5>
+      </div>
+      <div class="card-block">
+        <h1><%= @stock_devices.to_s %></h1>
+      </div>
+      <div class="card-footer text-muted">
+        <%= link_to manage_stock_list_path, class: "btn btn-outline-info" do %>
+          <%= fa_icon "list", text: "库存设备" %>
+         <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-6">
+    <div class="card text-center" style="margin-bottom:20px;">
+      <div class="card-header">
+        <h5 class="card-title">已报废</h5>
+      </div>
+      <div class="card-block">
+        <h1><%= @turnoff_devices.to_s %></h1>
+      </div>
+      <div class="card-footer text-muted">
+        <%= link_to manage_turnoff_list_path, class: "btn btn-outline-info" do %>
+          <%= fa_icon "list", text: "库存设备" %>
+         <% end %>
+      </div>
+    </div>
+  </div>
+</div>

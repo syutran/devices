@@ -1,0 +1,117 @@
+<%= simple_form_for @device, url: manage_put_allot_path(@device), method: :patch, html: {class: 'form-horizontal'} do |f| %>
+  <div class="form-inputs" style="margin-top:20px;" >
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row" style="margin-top:20px;">
+          <div class="col-4 text-right">名称</div>
+          <div class="col-8">
+            <%= @device.title %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row" style="margin-top:20px;">
+          <div class="col-4 text-right">类型</div>
+          <div class="col-8">
+            <%= @device.category.title if @device.category %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row" style="margin-top:20px;">
+          <div class="col-4 text-right">厂商/品牌</div>
+          <div class="col-8">
+            <%= @device.manufacturer %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row" style="margin-top:20px;">
+          <div class="col-4 text-right">产品型号</div>
+          <div class="col-8">
+            <%= @device.dev_model %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row" style="margin-top:20px;">
+          <div class="col-4 text-right">序列号</div>
+          <div class="col-8">
+            <%= @device.serial_number %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="row" style="margin-top:20px;">
+          <div class="col-4 text-right">购置日期</div>
+          <div class="col-8">
+            <%= @device.purchased %>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row" style="margin-top:20px;">
+          <div class="col-2 text-right">详细配置</div>
+          <div class="col-10">
+            <%= @device.parameter %>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row" style="margin-top:20px;">
+          <div class="col-2 text-right">使用日期</div>
+          <div class="col-10">
+            <%= f.input :used, as: :date, html5: true, label:false %>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-2 text-right">使用部门</div>
+          <div class="col-10">
+            <%= f.input :branch_id, collection: get_manage_branches, label:false %>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-2 text-right">领用人</div>
+          <div class="col-10">
+            <%= f.input :user, label: false %>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-2 text-right">备注</div>
+          <div class="col-10">
+            <%= f.input :description, label:false %>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-2 text-right">
+          </div>
+          <div class="col-10 text-right">
+            <div class="btn-group">
+              <%= f.button :submit, "确定提交", class: "btn btn-outline-info" %>
+              <%= link_to '返回', :back, class: "btn btn-outline-info" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <%= content_for :sidebar do %>
+  <div class="col-12">
+    <%= image_tag @device.avatar.url, class: "rounded",style: "width:100%; height:auto", alt: "图片" if @device.avatar.file? %>
+  </div>
+  <div class="col-12">
+    <%= image_tag @device.tagboard.url, style: "width:100%; height:auto" if @device.tagboard.file? %>
+  </div>
+  <div class="col-12">
+    <%= image_tag @device.custom.url, style: "width:100%; height:auto" if @device.custom.file? %>
+  </div>
+  <% end %>

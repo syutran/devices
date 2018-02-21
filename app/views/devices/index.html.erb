@@ -1,0 +1,71 @@
+<div class="d-flex listthead justify-content-between">
+  <h3>部门设备</h3>
+</div>
+<div class="col-12 nopadding">
+  <%= paginate @devices, theme: 'twitter-bootstrap-4'%>
+</div>
+<div class="row">
+  <% @devices.each do |device| %>
+    <div class="col-sm-12 col-md-12 col-lg-6">
+      <%= render partial: "device", locals: { device: device} %>
+    </div>
+  <% end %>
+</div>
+<div class="row" >
+  <div class="col-12 text-right">
+    <%= paginate @devices, theme: 'twitter-bootstrap-4' %>
+  </div>
+</div>
+
+<%= content_for :sidebar do %>
+  <% if @devices.any? %>
+    <%= link_to branch_devices_to_xlsx_path(@devices.first.branch_id,format: :xlsx), class: "btn btn-success btn-block" do %>
+      <% fa_icon "file-excel-o", text: "下载为电子表格（xlsx）文件" %>
+    <% end %>
+  <% end %>
+  <% if @dev_classes && @dev_classes.any? %>
+    <ul class="list-group" style="margin-top:15px;">
+      <li class="list-group-item">
+        分类表
+      </li>
+      <% @dev_classes.map do |key, value| %>
+      <li class="list-group-item justify-content-between">
+        <%= link_to get_class(key).title, devices_path(:dev_class => key, branch: params[:branch]) %>
+        <span class="badge badge-default badge-pill">
+          <%= value.to_s %>
+        </span>
+      </li>
+    <% end %>
+    </ul>
+  <% end %>
+  <% if @users_devices && @users_devices.any? %>
+    <ul class="list-group" style="margin-top:15px;">
+      <li class="list-group-item">
+        分类表
+      </li>
+      <% @users_devices.map do |key, value| %>
+      <li class="list-group-item justify-content-between">
+        <%= link_to key, devices_path(:user => key, branch: params[:branch]) %>
+        <span class="badge badge-default badge-pill">
+          <%= value.to_s %>
+        </span>
+      </li>
+    <% end %>
+    </ul>
+  <% end %>
+  <% if @dev_class_branches && @dev_class_branches.any? %>
+    <ul class="list-group" style="margin-top:15px;">
+      <li class="list-group-item">
+        部门
+      </li>
+      <% @dev_class_branches.map do |key, value| %>
+      <li class="list-group-item justify-content-between">
+        <%= link_to get_branch(key).branch, devices_path(dev_class: params[:dev_class], branch: key) %>
+        <span class="badge badge-default badge-pill">
+          <%= value.to_s %>
+        </span>
+      </li>
+    <% end %>
+    </ul>
+  <% end %>
+<% end %>

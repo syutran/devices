@@ -1,0 +1,5 @@
+class AddColumnManagerToBranches < ActiveRecord::Migration[5.0]
+  def change
+    add_column :branches, :manager_id, :integer
+  end
+end

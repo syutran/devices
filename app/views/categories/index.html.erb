@@ -1,0 +1,48 @@
+<div class="row">
+  <% @categories.each do |category| %>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <div class="card text-center" style="margin-bottom:20px;" >
+        <div style="position: relative;">
+        <%= category_head_image_tag category %>
+        <div class="card-block image-text d-flex">
+          <h5 class="card-title"><%= category.title %></h5>
+         </div>
+        </div>
+        <ul class = "list-group list-group-flush">
+          <li class="list-group-item justify-content-center">
+            <div>隶属类：</div>
+            <div><%= category.master.title if category.master %></div>
+          </li>
+          <li class="list-group-item justify-content-center">
+            <div>设备数：</div>
+            <div><%= category.devices_all_count.to_s %></div>
+          </li>
+        </ul>
+        <div class="card-footer text-muted">
+          <div class="btn-group btn-group-sm">
+            <%= link_to '信息', category, class: "btn btn-outline-success" %>
+            <%= link_to '编辑', edit_category_path(category), class: "btn btn-outline-primary" %>
+            <%= link_to '删除', category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-warning" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= content_for :sidebar do %>
+  <div style="margin-bottom:15px;">
+    <%= link_to new_category_path, class: "btn btn-success btn-block" do %>
+      <% fa_icon "plus", text: "添加新分类" %>
+    <% end %>
+  </div>
+  <% if @categories.count > 0 %>
+    <%= link_to categories_toxlsx_path(current_user.group,format: :xlsx), class: "btn btn-success btn-block" do %>
+      <% fa_icon "file-excel-o", text: "下载为电子表格（xlsx）文件" %>
+    <% end %>
+  <% end %>
+  <% if @categories.count > 0 %>
+    <%= link_to categories_all_toxlsx_path(current_user.group,format: :xlsx), class: "btn btn-success btn-block" do %>
+      <% fa_icon "file-excel-o", text: "下载全辖数据（xlsx）文件" %>
+    <% end %>
+  <% end %>
+<% end %>

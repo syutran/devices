@@ -1,0 +1,52 @@
+    <div class="card" >
+      <div class="card-header  <%= 'bg-warning' if @device.status != 1 && @device.status != 4 && @device.status != 5 %>">
+      <h5 class="card-title"><%= @device.title %></h5>
+      </div>
+      <div class="row">
+        <div class="col-4 text-right">厂商：</div>
+        <div class="col-8"> <%= @device.manufacturer ||= "未设置" %></div>
+      </div>
+      <div class="row">
+        <div class="col-4 text-right">设备分类：</div>
+        <div class="col-8"> <%= @device.category.title if @device.category %></div>
+      </div>
+      <div class="row">
+        <div class="col-4 text-right">设备类型：</div>
+        <div class="col-8"> <%= @device.dev_model ||= "未设置" %></div>
+      </div>
+      <div class="row">
+        <div class="col-4 text-right">序列号：</div>
+        <div class="col-8"> <%= @device.serial_number ||= "未设置" %></div>
+      </div>
+      <div class="row">
+        <div class="col-4 text-right">配置参数：</div>
+        <div class="col-8"> <%= @device.parameter ||= "未设置" %></div>
+      </div>
+      <div class="row">
+        <div class="col-4 text-right">购置日期：</div>
+        <div class="col-8"> <%= @device.purchased ||= "未设置" %></div>
+      </div>
+      <div class="row">
+        <div class="col-4 text-right">使用日期：</div>
+        <div class="col-8"> <%= @device.used ||= "未设置" %></div>
+      </div>
+      <div class="row">
+        <div class="col-4 text-right">使用部门：</div>
+        <div class="col-8"> <%= @device.branch.branch if @device.branch %></div>
+      </div>
+      <div class="row">
+        <div class="col-4 text-right">使用人：</div>
+        <div class="col-8"> <%= @device.user ||= "未设置" %></div>
+      </div>
+      <div class="row">
+        <div class="col-4 text-right">使用说明：</div>
+        <div class="col-8"> <%= @device.description %></div>
+      </div>
+      <div class="row">
+        <div class="col-4 text-right">当前状态：</div>
+        <div class="col-8"> <%= @device.get_status %></div>
+      </div>
+      <div class="card-footer text-right">
+        <%= yield %>
+      </div>
+    </div>

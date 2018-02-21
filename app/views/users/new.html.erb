@@ -1,0 +1,46 @@
+<br>
+<br>
+<h1>新用户注册</h1>
+<br>
+<%= form_for(@user, url: signup_path) do |f| %>
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-4 text-right">您的名字：</div>
+    <div class="col-8">
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-4 text-right">邮箱地址：</div>
+    <div class="col-8">
+      <%= f.email_field :email, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-4 text-right">登录密码：</div>
+    <div class="col-8">
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-4 text-right">再次确定密码：</div>
+    <div class="col-8">
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-4 text-right">
+          <%= rucaptcha_image_tag(alt: '请输入验证码') %>
+    </div>
+    <div class="col-8">
+      <%= rucaptcha_input_tag(class: 'form-control', placeholder: '请输入验证码~') %>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-8 offset-4 text-right">
+      <%= f.submit "创建账号", class: "btn btn-success" %>
+    </div>
+  </div>
+<% end %>
+<%= content_for :sidebar do %>
+  <%= render 'sidebar' %>
+<% end %>

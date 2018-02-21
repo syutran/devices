@@ -1,0 +1,55 @@
+<nav class="navbar fixed-top navbar-inverse bg-primary navbar-toggleable-md">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="d-flex">
+    <%= link_to content_for?(:head_title) ? yield(:head_title) : '电子设备统计管理', root_path, class: "navbar-brand" %>
+    <span class="navbar-text"><i class="fa fa-lg fa-television"></i></span>
+  </div>
+  <div class="navbar-collapse collapse" id="navbarNav">
+    <ul class="navbar-nav flex-row ml-auto justify-content-between">
+      <% if logged_in? %>
+        <li class="nav-item">
+          <%= link_to new_device_path, class: "nav-link" do %>
+            <%= fa_icon "plus", text: "新设备" %>
+          <% end %>
+        </li>
+        <% if current_user.is_admin || current_user.is_spy %>
+          <li class="nav-item">
+            <%= link_to categories_path, class: "nav-link" do %>
+              <%= fa_icon "cogs", text: "分类" %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to users_path, class: "nav-link" do %>
+              <%= fa_icon "users", text: "管理员" %>
+            <% end %>
+          </li>
+        <% end %>
+          <li class="nav-item">
+            <%= link_to branches_path, class: "nav-link" do %>
+              <%= fa_icon "sitemap", text: "部门" %>
+            <% end %>
+          </li>
+        <li class="nav-item">
+          <%= link_to user_path(current_user), class: "nav-link" do %>
+            <%= fa_icon "user", text: current_user.name %> 
+          <% end %>
+        </li>
+        <% unless current_user.is_admin || current_user.is_spy %>
+          <li class="nav-item">
+            <%= link_to(logout_path, method: "delete", class: "nav-link") do %>
+              <%= fa_icon "sing-out", text: "安全退出" %> 
+            <% end %>
+          </li>
+        <% end %>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to login_path, class: "nav-link" do %>
+            <%= fa_icon "sign-in", text: "用户登录" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
